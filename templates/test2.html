@@ -1,0 +1,64 @@
+<html>
+<head>
+    <!-- Title Page-->
+    <title>app測試</title>
+</head>
+<style>
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: rgb(0, 102, 204);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+input[type=submit]:hover {
+    background-color: rgba(0, 102, 204, 0.9);
+}
+
+div {
+    width: 400px;
+    padding: 20px;
+}
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>外部功能測試</h1>
+            </div>
+            <div class="col-lg-12">
+                <h3>回饋表單功能測試</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ satform.as_p }}
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+            <div class="col-lg-12">
+                <h3>新增進貨資料</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ purchaseform.as_p }}
+                    <button type="submit">提交</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

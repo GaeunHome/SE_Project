@@ -1,0 +1,239 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<head>
+    <!-- Title Page-->
+    <title>按摩椅進銷存</title>
+</head>
+<!-- STATISTIC CHART-->
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">按摩椅銷售狀況</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-5">
+                <!-- TOP CAMPAIGN-->
+                <div class="top-campaign">
+                    <h3 class="title-3 m-b-30">銷售型號排行</h3>
+                    <div class="table-responsive">
+                        <table class="table table-top-campaign">
+                            <tbody>
+                                {% for data in data_counts %}
+                                <tr>
+                                    <td>{{ data.0 }}</td>
+                                    <td>{{ data.1 }} 台</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END TOP CAMPAIGN-->
+            </div>
+            <div class="col-md-6 col-lg-7">
+                <!-- CHART PERCENT-->
+                <div class="chart-percent-2">
+                    <h3 class="title-3 m-b-30">品牌銷售佔比</h3>
+                    <div class="chart-wrap">
+                        <canvas id="percent-chart20"></canvas>
+                        <div id="chartjs-tooltip">
+                            <table></table>
+                        </div>
+                    </div>
+                    <div class="chart-info">
+                        <div class="chart-note">
+                            <span class="dot dot--one"></span>
+                            <span>Tokuyo</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--two"></span>
+                            <span>OSIM</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--three"></span>
+                            <span>HY</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--four"></span>
+                            <span>FUJI</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- END CHART PERCENT-->
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">公共按摩椅滿意度調查</h3>
+            </div>
+            <div class="col-lg-3">
+                <!-- CHART PERCENT-->
+                <div class="chart-percent-3 m-b-40" style="border-radius: 10px;">
+                    <h3 class="title-3 m-b-25">滿意度：Tokuyo</h3>
+                    <div class="chart-note m-b-5">
+                        <span class="dot dot--one"></span>
+                        <span>滿意</span>
+                    </div>
+                    <div class="chart-note">
+                        <span class="dot dot--two"></span>
+                        <span>不滿意</span>
+                    </div>
+                    <div class="chart-wrap m-t-60">
+                        <canvas id="percent_chart18"></canvas>
+                    </div>
+                </div>
+                <!-- END CHART PERCENT-->
+            </div>
+            <div class="col-lg-3">
+                <!-- CHART PERCENT-->
+                <div class="chart-percent-3 m-b-40" style="border-radius: 10px;">
+                    <h3 class="title-3 m-b-25">滿意度：OSIM</h3>
+                    <div class="chart-note m-b-5">
+                        <span class="dot dot--one"></span>
+                        <span>滿意</span>
+                    </div>
+                    <div class="chart-note">
+                        <span class="dot dot--two"></span>
+                        <span>不滿意</span>
+                    </div>
+                    <div class="chart-wrap m-t-60">
+                        <canvas id="percent_chart19"></canvas>
+                    </div>
+                </div>
+                <!-- END CHART PERCENT-->
+            </div>
+            <div class="col-lg-3">
+                <!-- CHART PERCENT-->
+                <div class="chart-percent-3 m-b-40" style="border-radius: 10px;">
+                    <h3 class="title-3 m-b-25">滿意度：FUJI</h3>
+                    <div class="chart-note m-b-5">
+                        <span class="dot dot--one"></span>
+                        <span>滿意</span>
+                    </div>
+                    <div class="chart-note">
+                        <span class="dot dot--two"></span>
+                        <span>不滿意</span>
+                    </div>
+                    <div class="chart-wrap m-t-60">
+                        <canvas id="percent_chart20"></canvas>
+                    </div>
+                </div>
+                <!-- END CHART PERCENT-->
+            </div>
+            <div class="col-lg-3">
+                <!-- CHART PERCENT-->
+                <div class="chart-percent-3 m-b-40" style="border-radius: 10px;">
+                    <h3 class="title-3 m-b-25">滿意度：HY</h3>
+                    <div class="chart-note m-b-5">
+                        <span class="dot dot--one"></span>
+                        <span>滿意</span>
+                    </div>
+                    <div class="chart-note">
+                        <span class="dot dot--two"></span>
+                        <span>不滿意</span>
+                    </div>
+                    <div class="chart-wrap m-t-60">
+                        <canvas id="percent_chart21"></canvas>
+                    </div>
+                </div>
+                <!-- END CHART PERCENT-->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">進貨資料表</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <div class="rs-select2--light rs-select2--sm">
+                                今日
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <a href="{% url 'satisfaction_form' %}">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                <i class="zmdi zmdi-plus"></i>新增進貨資料
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>進貨產品</th>
+                                <th>購買數量</th>
+                                <th>進貨日期</th>
+                                <th>功能</th>
+                                <th>產品價格</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in purch %}
+                            <tr class="tr-shadow">
+                                <td class="desc">{{ data.MNAME }} - {{ data.MClass }}</td>
+                                <td>{{ data.PAmount }}</td>
+                                <td>{{ data.PDate }}</td>
+                                <td>
+                                    <span class="status--process">{{ data.MFuction }}</span>
+                                </td>
+                                <td>${{ data.PCost }}</td>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row">
+    <div align="center" class="col-lg-12" style="padding-top: 20px;">
+        <h3 style="margin-bottom: 1rem;">新增進貨資料</h3>
+        <form method="post" style="line-height: 2rem;">
+            {% csrf_token %}
+            {{ purchaseform.as_p }}
+            <button class="au-btn au-btn-icon au-btn--green au-btn--small" type="submit" style="padding: 0.5rem; box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px; border-radius: 10px; margin-top: 1rem;"><i class="zmdi zmdi-plus"></i>提交</button>
+        </form>
+    </div>
+</div>
+<script>
+    var FUJI = JSON.parse('{{ FUJI }}');
+    var HY = JSON.parse('{{ HY }}');
+    var Tokuyo = JSON.parse('{{ Tokuyo }}');
+    var OSIM = JSON.parse('{{ OSIM }}');
+    var brand = JSON.parse('{{ brand }}');
+    console.log(FUJI);
+    console.log(HY);
+    console.log(Tokuyo);
+    console.log(OSIM);
+    console.log(brand);
+    var satisfaction1 = JSON.parse('{{ satisfaction1 }}');
+    var satisfaction2 = JSON.parse('{{ satisfaction2 }}');
+    var satisfaction3 = JSON.parse('{{ satisfaction3 }}');
+    var satisfaction4 = JSON.parse('{{ satisfaction4 }}');
+    var satisfaction5 = JSON.parse('{{ satisfaction5 }}');
+    var satisfaction6 = JSON.parse('{{ satisfaction6 }}');
+    var satisfaction7 = JSON.parse('{{ satisfaction7 }}');
+    var satisfaction8 = JSON.parse('{{ satisfaction8 }}');
+    console.log(satisfaction1);
+    console.log(satisfaction2);
+    console.log(satisfaction3);
+    console.log(satisfaction4);
+    console.log(satisfaction5);
+    console.log(satisfaction6);
+    console.log(satisfaction7);
+    console.log(satisfaction9);
+</script>
+<!-- END STATISTIC CHART-->
+{% endblock %} 

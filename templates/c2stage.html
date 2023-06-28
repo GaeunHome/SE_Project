@@ -1,0 +1,51 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<head>
+    <title>客群分析</title>
+</head>
+<!-- STATISTIC CHART-->
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">圖表分析</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="au-card m-b-30" style="height: 400px;">
+                    <div class="au-card-inner">
+                        <h3 class="title-2 m-b-40">性別比率</h3>
+                        <canvas id="pieChart" style="height: 275px;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="au-card m-b-30" style="height: 400px;">
+                    <div class="au-card-inner">
+                        <h3 class="title-2 m-b-40">職業比率</h3>
+                        <canvas id="polarChart" style="height: 275px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var man = JSON.parse('{{ man }}');
+    var woman = JSON.parse('{{ woman }}');
+    console.log(man)
+    console.log(woman)
+    var fin = JSON.parse('{{ fin }}');
+    var other = JSON.parse('{{ other }}');
+    var sport = JSON.parse('{{ sport }}');
+    var unknown = JSON.parse('{{ unknown }}');
+    var server = JSON.parse('{{ server }}');
+    console.log(fin)
+    console.log(other)
+    console.log(sport)
+    console.log(unknown)
+    console.log(server)
+</script>
+<!-- END STATISTIC CHART-->
+{% endblock %} 

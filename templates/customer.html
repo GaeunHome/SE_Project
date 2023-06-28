@@ -1,0 +1,375 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<haed>
+    <!-- Title Page-->
+    <title>客戶資料-{{ name }}</title>
+    <style>
+        input.backtolast{
+            margin-left: 19.2rem;
+            margin-bottom: 2.5rem;
+            margin-bottom: 2.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            background: #EA7500;
+            color: #ffffff;
+            border-radius: 5%;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<!-- 客戶分析簡單版資料-->
+<section class="statistic statistic2">
+    <!--<input type ="button" onclick="history.back()" value="回到上一頁" class="backtolast"></input>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--blue">
+                    <h2 class="number">{{ Newcustomer }}</h2>
+                    <span class="desc">本月新進客戶</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-account-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--orange">
+                    <h2 class="number">{{ Perfer }}</h2>
+                    <span class="desc"><a href="{% url 'c2stage' customers=customers Perfer=Perfer %}">客戶偏好產品</a></span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--bluegreen">
+                    <h2 class="number">{{ Recommend }}</h2>
+                    <span class="desc">客戶最常使用之獲取訊息平台</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-calendar-note"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--green">
+                    <h2 class="number">{{ max_sale_name }}</h2>
+                    <span class="desc">本月銷售最高產品</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-money"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END 客戶分析簡單版資料-->
+
+<!-- 圖表分析-->
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">圖表分析</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <!-- 年齡分析-->
+                <div class="chart-percent-3">
+                    <h3 class="title-3 m-b-30">客戶年齡分析</h3>
+                    <div class="chart-wrap">
+                        <canvas id="percent_chart3"></canvas>
+                        <div id="chartjs-tooltip">
+                            <table></table>
+                        </div>
+                    </div>
+                    <div class="chart-info">
+                        <div class="chart-note">
+                            <span class="dot dot--one"></span>
+                            <span><br>21～30歲</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--two"></span>
+                            <span><br>31～40歲</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--three"></span>
+                            <span><br>41～50歲</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--four"></span>
+                            <span><br>51～60歲</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--five"></span>
+                            <span><br>61歲以上</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- END 年齡分析-->
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <!-- CHART-->
+                <div class="statistic-chart-2">
+                    <h3 class="title-3 m-b-30">當月客戶各產品銷售數量</h3>
+                    <div class="chart-wrap">
+                        <canvas id="widgetChart_6"></canvas>
+                    </div>
+                    <div class="statistic-chart-2-note">
+                        <span>* 總計十二樣產品</span><br>
+                        <span>* 按照產品編號排列</span><br>
+                        <span>* 各分店有所不同</span>
+                    </div>
+                </div>
+                <!-- END CHART-->
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <!-- 優惠券使用率-->
+                <div class="chart-percent-2">
+                    <h3 class="title-3 m-b-30">優惠券使用率</h3>
+                    <div class="chart-wrap">
+                        <canvas id="percent-chart2"></canvas>
+                        <div id="chartjs-tooltip">
+                            <table></table>
+                        </div>
+                    </div>
+                    <div class="chart-info">
+                        <div class="chart-note">
+                            <span class="dot dot--one"></span>
+                            <span>已使用</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--two"></span>
+                            <span>未使用</span>
+                        </div>
+                    </div>
+                    <div class="statistic-chart-2-note">
+                        <span>* 計算單位為%</span>
+                    </div>
+                </div>
+                <!-- END 優惠券使用率-->
+            </div>
+        </div>
+    </div> 
+</section>
+
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <!-- 職業分析-->
+                <div class="statistic-chart-2">
+                    <h3 class="title-3 m-b-30">當月消費客戶職業分析</h3>
+                    <div class="chart-wrap">
+                        <canvas id="widgetChart_7"></canvas>
+                    </div>
+                    <div class="statistic-chart-2-note">
+                        <span>* 無特定指定職業</span><br>
+                        <span>* 根據每月<u>不同消費者及不同店家</u>有所變動</span><br>
+                        <span>* 包含新舊客戶</span>
+                    </div>
+                </div>
+                <!-- END 職業分析-->
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <!-- 產品偏好理由-->
+                <div class="chart-percent-3" style="border-radius: 10px;">
+                    <h3 class="title-3 m-b-30">客戶偏好產品特色分析</h3>
+                    <div class="chart-wrap">
+                        <canvas id="percent-chart4"></canvas>
+                        <div id="chartjs-tooltip">
+                            <table></table>
+                        </div>
+                    </div>
+                    <div class="chart-info">
+                        <div class="chart-note">
+                            <span class="dot dot--one"></span>
+                            <span><br>全身</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--two"></span>
+                            <span><br>腿部</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--three"></span>
+                            <span><br>肩頸</span>
+                        </div>
+                        <div class="chart-note">
+                            <span class="dot dot--four"></span>
+                            <span><br>腰部</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- END 產品偏好理由-->
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <!-- CHART-->
+                <div class="statistic-chart-2">
+                    <h3 class="title-3 m-b-30">客戶透過何種管道得知本公司</h3>
+                    <div class="chart-wrap">
+                        <canvas id="widgetChart_8"></canvas>
+                    </div>
+                    <div class="statistic-chart-2-note">
+                        <span>* 無特定指定管道</span><br>
+                        <span>* 根據每月<u>不同消費者及不同店家</u>有所變動</span><br>
+                        <span>* 僅列出較為多數的選項</span>
+                    </div>
+                </div>
+                <!-- END CHART-->
+            </div>
+        </div>
+    </div> 
+</section>
+<!-- END 圖表分析-->
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">客戶資料表</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <div class="rs-select2--light rs-select2--sm">
+                            <select class="js-select2" name="time">
+                                <option selected="selected">今日</option>
+                                <option value="">三天內</option>
+                                <option value="">一周內</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                            <i class="zmdi zmdi-plus"></i>新增客戶資料</button>
+                    </div>
+                </div>
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="au-checkbox">
+                                        <input type="checkbox">
+                                        <span class="au-checkmark"></span>
+                                    </label>
+                                </th>
+                                <th>姓名</th>
+                                <th>購買產品</th>
+                                <th>產品價格</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in datas %}
+                            {% for names in data2 %}
+                            {% if data.CID == names.CID %}
+                            <tr class="tr-shadow">
+                                <td>
+                                    <label class="au-checkbox">
+                                        <input type="checkbox">
+                                        <span class="au-checkmark"></span>
+                                    </label>
+                                </td>
+                                <td>{{ names.CName }}</td>
+                                <td class="desc">{{ data.MNAME }}-{{ data.MClass }}</td>
+                                <td>${{ data.SPrice }}</td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    var body = JSON.parse('{{ body }}');
+    var leg = JSON.parse('{{ leg }}');
+    var waist = JSON.parse('{{ waist }}');
+    var shoulder = JSON.parse('{{ shoulder }}');
+    var perfer = JSON.parse('{{ perfer }}');
+    console.log(body)
+    console.log(leg)
+    console.log(waist)
+    console.log(shoulder)
+    console.log(perfer)
+
+    var discount = JSON.parse('{{ discountuse }}');
+    var notdiscount = JSON.parse('{{ discountnotuse }}');
+    var total = JSON.parse('{{ total }}');
+    console.log(discount)
+    console.log(notdiscount)
+    console.log(total)
+
+    var myData1 = JSON.parse('{{ age1 }}');
+    var myData2 = JSON.parse('{{ age2 }}');
+    var myData3 = JSON.parse('{{ age3 }}');
+    var myData4 = JSON.parse('{{ age4 }}');
+    var myData5 = JSON.parse('{{ age5 }}');
+    var myData6 = JSON.parse('{{ sum }}');
+    var result1 = myData1 / myData6;
+    var result2 = myData2 / myData6;
+    var result3 = myData3 / myData6;
+    var result4 = myData4 / myData6;
+    var result5 = myData5 / myData6;
+    console.log(result1);
+    console.log(result2);
+    console.log(result3);
+    console.log(result4);
+    console.log(result5);
+
+    var sale1 = JSON.parse('{{ sale1 }}');
+    console.log(sale1);
+    var sale2 = JSON.parse('{{ sale2 }}');
+    console.log(sale2);
+    var sale3 = JSON.parse('{{ sale3 }}');
+    console.log(sale3);
+    var sale4 = JSON.parse('{{ sale4 }}');
+    console.log(sale4);
+    var sale5 = JSON.parse('{{ sale5 }}');
+    console.log(sale5);
+    var sale6 = JSON.parse('{{ sale6 }}');
+    console.log(sale6);
+    var sale7 = JSON.parse('{{ sale7 }}');
+    console.log(sale7);
+    var sale8 = JSON.parse('{{ sale8 }}');
+    console.log(sale8);
+    var sale9 = JSON.parse('{{ sale9 }}');
+    console.log(sale9);
+    var sale10 = JSON.parse('{{ sale10 }}');
+    console.log(sale10);
+    var sale11 = JSON.parse('{{ sale11 }}');
+    console.log(sale11);
+    var sale12 = JSON.parse('{{ sale12 }}');
+    console.log(sale12);
+    var job1 = JSON.parse('{{ job1 }}');
+    console.log(job1);
+    var job2 = JSON.parse('{{ job2 }}');
+    console.log(job2);
+    var job3 = JSON.parse('{{ job3 }}');
+    console.log(job3);
+    var job4 = JSON.parse('{{ job4 }}');
+    console.log(job4);
+    var job5 = JSON.parse('{{ job5 }}');
+    console.log(job5);
+    var job6 = JSON.parse('{{ job6 }}');
+    console.log(job6);
+    var funct1 = JSON.parse('{{ funct1 }}');
+    console.log(funct1);
+    var funct2 = JSON.parse('{{ funct2 }}');
+    console.log(funct2);
+    var funct3 = JSON.parse('{{ funct3 }}');
+    console.log(funct3);
+    var funct4 = JSON.parse('{{ funct4 }}');
+    console.log(funct4);
+    var funct5 = JSON.parse('{{ funct5 }}');
+    console.log(funct5);
+    var funct6 = JSON.parse('{{ funct6 }}');
+    console.log(funct6);
+</script>
+<!-- END DATA TABLE-->
+<!-- END PAGE CONTENT  -->
+{% endblock %} 

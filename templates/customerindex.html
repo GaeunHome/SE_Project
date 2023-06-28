@@ -1,0 +1,134 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<head>
+    <!-- Title Page-->
+    <title>分店資料</title>
+    <style>
+        select.selectstyle{
+            margin-bottom: 2.5rem;
+            padding: 0.5rem;
+            border-radius: 5%;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: #EA7500;
+            color: #ffffff;
+            border: none;
+        }
+        
+        select.selectstyle option{
+            margin-bottom: 2.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            background: #ffffff;
+            color: #EA7500;
+            border: none;
+        }
+    </style>
+</head>
+<!-- 客戶分析簡單版資料-->
+<section class="statistic statistic2">
+    <div class="container">
+        <form action="/customer" method="GET" id="salesForm">
+            <div class="au-breadcrumb-content">
+                <select id="who" class="who" onchange="redirectToSales()">
+                    <option>----選擇分店查閱----</option>
+                    {% for salesperson in salespersons %}
+                        <option value="{{ salesperson.SName }}">{{ salesperson.SName }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <script>
+            function redirectToSales() {
+                var selectElement = document.getElementById("who");
+                var selectedOption = selectElement.options[selectElement.selectedIndex];
+                var selectedSalesperson = selectedOption.text;
+                window.location.href = "./sales.html?salesperson=" + selectedSalesperson;
+            }
+        </script>
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--blue">
+                    <h2 class="number">選擇分店查閱</h2>
+                    <span class="desc">本月新進客戶</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-account-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--orange">
+                    <h2 class="number">選擇分店查閱</h2>
+                    <span class="desc">客戶偏好產品</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--bluegreen">
+                    <h2 class="number">選擇分店查閱</h2>
+                    <span class="desc">客戶最常使用之獲取訊息平台</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-calendar-note"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="statistic__item statistic__item--green">
+                    <h2 class="number">選擇分店查閱</h2>
+                    <span class="desc">本月客戶銷售最高單價</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-money"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END 客戶分析簡單版資料-->
+
+
+<!-- 圖表分析-->
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">圖表分析</h3>
+                <h3 class="title-5 m-b-35">請選擇分店查閱詳細資料</h3>
+            </div>
+        </div>
+    </div> 
+</section>
+
+<section class="statistic-chart">
+    <div class="container">
+
+    </div> 
+</section>
+<!-- END 圖表分析-->
+
+<!-- DATA TABLE-->
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">客戶資料表</h3>
+                <h3 class="title-5 m-b-35">請選擇分店查閱詳細資料</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END DATA TABLE-->
+
+<script>
+    function redirectToPage() {
+        const select = document.getElementById("mySelect");
+        const selectedValue = select.value;
+
+        if (selectedValue) {
+        window.location.href = selectedValue;
+        }
+    }
+</script>
+{% endblock %} 

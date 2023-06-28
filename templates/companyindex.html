@@ -1,0 +1,121 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<head>
+    <!-- Title Page-->
+    <title>總儀表板</title>
+    <style>
+        input.backtolast{
+            margin-left: 19.2rem;
+            margin-bottom: 2.5rem;
+            margin-bottom: 2.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            background: #EA7500;
+            color: #ffffff;
+            border-radius: 5%;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<!-- PAGE CONTENT-->
+<div class="page-content--bgf7">
+    <!-- BREADCRUMB-->
+    <section class="au-breadcrumb2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="au-breadcrumb-content">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END BREADCRUMB-->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <!-- PAGE CONTENT-->
+                    <div class="page-content">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <!-- RECENT REPORT-->
+                                <div class="recent-report3 m-b-40" style="border-radius: 10px;">
+                                    <div class="title-wrap">
+                                        <h3 class="title-3">年度營業額</h3>
+                                        <div class="chart-info-wrap">
+                                            <div class="chart-note">
+                                                <span class="dot dot--one"></span>
+                                                <span>今年</span>
+                                            </div>
+                                            <div class="chart-note mr-0">
+                                                <span class="dot dot--two"></span>
+                                                <span>去年</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chart-wrap">
+                                        <canvas id="recent-rep3-chart"></canvas>
+                                    </div>
+                                    <div class="chart-note">
+                                        <span></br></br>* 單位以萬計算</span>
+                                    </div>
+
+                                </div>
+                                <!-- END RECENT REPORT-->
+                            </div>
+                            <div class="col-lg-4">
+                                <!-- CHART PERCENT-->
+                                <div class="chart-percent-3 m-b-40" style="border-radius: 10px;">
+                                    <h3 class="title-3 m-b-25">年度目標完成率</h3>
+                                    <div class="chart-note m-b-5">
+                                        <span class="dot dot--one"></span>
+                                        <span>已完成</span>
+                                    </div>
+                                    <div class="chart-note">
+                                        <span class="dot dot--two"></span>
+                                        <span>未完成</span>
+                                    </div>
+                                    <div class="chart-wrap m-t-60">
+                                        <canvas id="percent_chart10"></canvas>
+                                    </div>
+                                </div>
+                                <!-- END CHART PERCENT-->
+                            </div>
+                        </div>
+                        <!--END DATA TABLE-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script>
+    var total1 = JSON.parse('{{ totalthisJuly }}');
+    var total2 = JSON.parse('{{ totalpastJuly }}');
+    var total3 = JSON.parse('{{ totalthisMay }}');
+    var total4 = JSON.parse('{{ totalpastMay }}');
+    var total5 = JSON.parse('{{ totalthisApril }}');
+    var total6 = JSON.parse('{{ totalpastApril }}');
+    var total7 = JSON.parse('{{ totalthisMarch }}');
+    var total8 = JSON.parse('{{ totalpastMarch }}');
+    console.log(total1);
+    console.log(total2);
+    console.log(total3);
+    console.log(total4);
+    console.log(total5);
+    console.log(total6);
+    console.log(total7);
+    console.log(total8);
+    var goal = JSON.parse('{{ goal }}');
+    var score = JSON.parse('{{ score }}');
+    console.log(goal);
+    console.log(score);
+    // 數字小數點 
+    var isfinish = score/goal;
+    var isnotfinish = 1-isfinish;
+    console.log(isfinish);
+    console.log(isnotfinish);
+</script>
+{% endblock %} 

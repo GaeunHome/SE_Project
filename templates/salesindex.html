@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} 
+{% block content %} 
+<html lang="en">
+
+<head>
+    <title>業務員資料</title>
+</head>
+
+<!-- 概況-->
+<section class="statistic statistic2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="/sales" method="GET" id="salesForm">
+                    <div class="au-breadcrumb-content">
+                        <select id="who" class="who" onchange="redirectToSales()">
+                            <option>請選擇選擇業務員</option>
+                            {% for salesperson in salespersons %}
+                                <option value="{{ salesperson.SName }}">{{ salesperson.SName }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+                <script>
+                    function redirectToSales() {
+                        var selectElement = document.getElementById("who");
+                        var selectedOption = selectElement.options[selectElement.selectedIndex];
+                        var selectedSalesperson = selectedOption.text;
+                        window.location.href = "./sales.html?salesperson=" + selectedSalesperson;
+                    }
+                </script>
+                                                            
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">業務員概況分析</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-4">
+                <div class="statistic__item statistic__item--blue">
+                    <h2 class="number">請選擇業務員</h2>
+                    <span class="desc">客戶回報率</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-account-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="statistic__item statistic__item--orange">
+                    <h2 class="number">請選擇業務員</h2>
+                    <span class="desc">最多賣出</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-shopping-cart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-4">
+                <div class="statistic__item statistic__item--bluegreen">
+                    <h2 class="number">請選擇業務員</h2>
+                    <span class="desc">業績達成率</span>
+                    <div class="icon">
+                        <i class="zmdi zmdi-money"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END 客戶分析簡單版資料-->
+
+<!-- STATISTIC CHART-->
+<section class="statistic-chart">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-35">圖表分析</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-5 m-b-25">請選擇業務員以查看細部內容</h3>
+            </div>
+        </div>
+        {% comment %} <div class="row">
+            <div class="col-lg-6">
+                <div class="au-card m-b-30" style="height: 400px;">
+                    <div class="au-card-inner">
+                        <h3 class="title-2 m-b-40">出缺勤比率</h3>
+                        <canvas id="doughutChart" style="height: 150px;"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="au-card m-b-30" style="height: 400px;">
+                    <div class="au-card-inner">
+                        <h3 class="title-2 m-b-40">銷售品項比率</h3>
+                        <canvas id="pieChart" style="height: 275px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+</section>
+<!-- END STATISTIC CHART-->
+<script>
+    // 获取下拉菜单元素
+    var dropdownMenu = document.getElementById("dropdownMenu");
+
+    // 获取下拉菜单项的集合
+    var dropdownItems = dropdownMenu.getElementsByClassName("dropdown-item");
+
+    // 遍历下拉菜单项，为每个菜单项添加点击事件监听器
+    for (var i = 0; i < dropdownItems.length; i++) {
+        dropdownItems[i].addEventListener("click", function() {
+            // 获取点击的菜单项的文本内容
+            var selectedValue = this.innerText;
+
+            // 将选中的值显示在按钮上
+            var dropdownButton = document.getElementById("dropdownMenuButton");
+            dropdownButton.innerText = selectedValue;
+        });
+    }
+
+</script>
+{% endblock %} 
