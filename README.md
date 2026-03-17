@@ -4,8 +4,6 @@
 [![Django](https://img.shields.io/badge/Django-Framework-092E20)](https://www.djangoproject.com/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3)](https://getbootstrap.com/)
 
-111學年度第2學期 [MI340G]「軟體專案管理」 - 期末專案「營運儀表板」
-
 以一個按摩椅公司為案例進行需求分析，設計營運儀表板，涵蓋庫存管理、員工績效、銷售數據等。
 
 ## 團隊成員
